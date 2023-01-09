@@ -1,7 +1,9 @@
 package com.anvesh.recipieservice.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -9,6 +11,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,5 +26,8 @@ public class Publisher {
     @Column(name = "recipe_id")
     private Set<Recipie> recipieId;
 
+    public Publisher(String name){
+        this.name=name;
+    }
 
 }

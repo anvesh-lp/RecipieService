@@ -9,4 +9,6 @@ public interface IngredientService {
 
     public List<Ingredient> findByName(String name);
 
+    public Ingredient save(Ingredient ingredient);
+
 }

@@ -21,8 +21,15 @@ public class IngredientsServiceImp implements IngredientService {
         return ingredientRepo.findAll();
     }
 
-    public List<Ingredient> findByName(String name){
-        Optional<List<Ingredient>> ingredients=ingredientRepo.findAllByName(name);
-        return ingredients.orElseThrow(()->new ResourceNotFoundException("Cant find resource with name "+name));
+    public List<Ingredient> findByName(String name) {
+        Optional<List<Ingredient>> ingredients = ingredientRepo.findAllByName(name);
+        return ingredients.orElseThrow(() -> new ResourceNotFoundException("Cant find resource with name " + name));
     }
+
+    @Override
+    public Ingredient save(Ingredient ingredient) {
+        return ingredientRepo.save(ingredient);
+    }
+
+
 }
