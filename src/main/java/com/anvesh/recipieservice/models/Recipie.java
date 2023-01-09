@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "recipie")
 public class Recipie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,12 +31,18 @@ public class Recipie {
     @ManyToMany()
     @JoinTable(
             name = "ingredient_recipie",
-            joinColumns = @JoinColumn(name = "Ingredients_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipies")
+            joinColumns = @JoinColumn(name = "Ingredient_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipie")
     )
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     public Recipie(String name) {
         this.name = name;
     }
+
+    public void add(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+        ingredient.getRecipies().add(this);
+    }
+
 }
