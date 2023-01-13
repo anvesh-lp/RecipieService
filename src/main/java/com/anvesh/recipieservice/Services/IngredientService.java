@@ -11,4 +11,6 @@ public interface IngredientService {
 
     public Ingredient save(Ingredient ingredient);
 
+    public Ingredient findById(Long id);
+
 }

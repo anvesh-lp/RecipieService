@@ -31,5 +31,10 @@ public class IngredientsServiceImp implements IngredientService {
         return ingredientRepo.save(ingredient);
     }
 
+    @Override
+    public Ingredient findById(Long id) {
+        Optional<Ingredient> ingredientOptional = ingredientRepo.findById(id);
+        return ingredientOptional.orElseThrow(() -> new ResourceNotFoundException("Cant find id " + id));
+    }
 
 }

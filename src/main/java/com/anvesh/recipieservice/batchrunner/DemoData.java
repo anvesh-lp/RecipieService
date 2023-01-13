@@ -6,6 +6,8 @@ import com.anvesh.recipieservice.Services.RecipeService;
 import com.anvesh.recipieservice.models.Ingredient;
 import com.anvesh.recipieservice.models.Publisher;
 import com.anvesh.recipieservice.models.Recipie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ public class DemoData implements CommandLineRunner {
     private final RecipeService recipeRepository;
 
     private final PublisherService publisherRepository;
+    Logger logger = LoggerFactory.getLogger(DemoData.class);
 
     public DemoData(IngredientService ingredientRepo, RecipeService recipeRepository, PublisherService publisherRepository) {
         this.ingredientRepo = ingredientRepo;
