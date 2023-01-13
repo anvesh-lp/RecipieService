@@ -8,9 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,6 +42,14 @@ public class IngredientController {
         Ingredient ingredient = ingredientRepository.findById(id);
         return new ResponseEntity<>(new IngredientDTO(ingredient.getName(), ingredient.getQuantity()),
                 HttpStatus.OK);
+    }
+
+    @PostMapping("/ingredient")
+    public ResponseEntity<IngredientDTO> getIngredientById(@RequestBody IngredientDTO ingredientDTO) {
+        Ingredient ingredient = ingredientRepository.save(ingredientDTO);
+        logger.info("Ingredient Created " + ingredient.getId());
+        return new ResponseEntity<>(new IngredientDTO(ingredient.getName(), ingredient.getQuantity()),
+                HttpStatus.CREATED);
     }
 
 }
