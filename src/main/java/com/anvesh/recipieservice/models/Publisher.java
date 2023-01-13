@@ -17,14 +17,14 @@ import java.util.Set;
 @Table(name = "publisher")
 public class Publisher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(targetEntity = Recipie.class)
+    @OneToMany(mappedBy = "publisher_id", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "recipie_id")
     private Set<Recipie> recipieId = new HashSet<>();
 

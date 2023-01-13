@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(name = "recipie")
 public class Recipie {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -26,23 +26,32 @@ public class Recipie {
     private String name;
 
     //    @Column(name = "publisher", nullable = false)
-    @OneToOne(targetEntity = Publisher.class)
+    @ManyToOne
+    @JoinColumn(name = "publisher", insertable = false)
     private Publisher publisher_id;
+
+
     @ManyToMany()
     @JoinTable(
             name = "ingredient_recipie",
-            joinColumns = @JoinColumn(name = "Ingredient_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipie")
+            joinColumns = @JoinColumn(name = "recipie"),
+            inverseJoinColumns = @JoinColumn(name = "Ingredient_id")
     )
+    @Column(nullable = false)
     private Set<Ingredient> ingredients = new HashSet<>();
 
     public Recipie(String name) {
         this.name = name;
     }
 
-    public void add(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
-        ingredient.getRecipies().add(this);
+//    public void add(Ingredient ingredient) {
+//        this.ingredients.add(ingredient);
+//        ingredient.getRecipies().add(this);
+//    }
+
+    public void addPublisher(Publisher publisher) {
+        this.publisher_id = publisher;
     }
+
 
 }

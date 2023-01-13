@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(name = "ingredient")
 public class Ingredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -27,7 +27,9 @@ public class Ingredient {
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
+
     @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
+    @Column(nullable = false)
     private Set<Recipie> recipies = new HashSet<>();
 
     public Ingredient(String name, int quantity) {
